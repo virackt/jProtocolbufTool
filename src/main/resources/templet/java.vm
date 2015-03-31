@@ -1,0 +1,21 @@
+package $package;
+import java.util.*;
+#foreach ($imp in $imps)
+    import $imp;
+#end
+
+public class $className{
+private static Map
+<Integer, Class> map = new HashMap
+<Integer, Class>();
+
+public static void init(){
+#foreach ($obj in $list)
+map.put($obj.key, ${obj.value}.requestMsg.class);
+#end
+}
+
+public static Class get(Integer id){
+return map.get(id);
+}
+}
