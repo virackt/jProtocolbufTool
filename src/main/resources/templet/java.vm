@@ -12,21 +12,28 @@ private static Map
 <Integer, GeneratedMessage> map = new HashMap
 <Integer, GeneratedMessage>();
 
-private static Map<Descriptors.Descriptor descriptor, Integer> keyMap = new HashMap<Descriptors.Descriptor descriptor, Integer>();
+private static Map<Descriptors.Descriptor, Integer> keyMap = new HashMap<Descriptors.Descriptor, Integer>();
 
 public static void init(){
 #foreach ($obj in $list)
 map.put($obj.key, ${obj.value}.requestMsg.getDefaultInstance());
+    keyMap.put(${obj.value}.requestMsg.getDescriptor(), $obj.key);
 #end
 
 
 }
-
+/**
+ *根据id获取协议
+ *
+ */
 public static GeneratedMessage getMessage(Integer id){
 return map.get(id);
 }
 
-
+/**
+*根据协议获取id
+*
+*/
 public static int getMsgId(Descriptors.Descriptor descriptor){
 return keyMap.get(descriptor);
 }

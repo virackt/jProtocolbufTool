@@ -1,4 +1,31 @@
 *.class
+#Compiled source#
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+.classpath
+*.iml
+*.ipr
+*.iws
+.project
+.settings/
+.gradle/
+target/
+build/
+bin/
+tags
+.idea
+*.aof
+*.rdb
+
+#Packages#
+*.zip
+*.7z
+*.tar
+*.rar
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

@@ -1,21 +1,40 @@
 package $package;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import com.google.protobuf.GeneratedMessage;
+import com.google.protobuf.Descriptors;
 #foreach ($imp in $imps)
-    import $imp;
+import $imp;
 #end
 
 public class $className{
 private static Map
-<Integer, Class> map = new HashMap
-<Integer, Class>();
+<Integer, GeneratedMessage> map = new HashMap
+<Integer, GeneratedMessage>();
+
+private static Map<Descriptors.Descriptor, Integer> keyMap = new HashMap<Descriptors.Descriptor, Integer>();
 
 public static void init(){
 #foreach ($obj in $list)
-map.put($obj.key, ${obj.value}.requestMsg.class);
+map.put($obj.key, ${obj.value}.requestMsg.getDefaultInstance());
+    keyMap.put(${obj.value}.requestMsg.getDescriptor(), $obj.key);
 #end
+
+
+}
+/**
+ *根据id获取协议
+ *
+ */
+public static GeneratedMessage getMessage(Integer id){
+return map.get(id);
 }
 
-public static Class get(Integer id){
-return map.get(id);
+/**
+*根据协议获取id
+*
+*/
+public static int getMsgId(Descriptors.Descriptor descriptor){
+return keyMap.get(descriptor);
 }
 }
